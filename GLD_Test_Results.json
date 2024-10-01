@@ -1,15 +1,29 @@
 {
     "ADF Test": {
-        "Test Statistic": -6.5842170652828775,
-        "p-value": 7.383913067736119e-09,
-        "Used Lag": 21,
-        "Number of Observations": 1397,
-        "Critical Values": {
-            "1%": -3.4350395894411734,
-            "5%": -2.863611117606763,
-            "10%": -2.5678726562185354
+        "ADF Test (AIC)": {
+            "Test Statistic": -6.5842170652828775,
+            "p-value": 7.383913067736119e-09,
+            "Used Lag": 21,
+            "Number of Observations": 1397,
+            "Critical Values": {
+                "1%": -3.4350395894411734,
+                "5%": -2.863611117606763,
+                "10%": -2.5678726562185354
+            },
+            "IC Best": 5547.328124708149
         },
-        "IC Best": 5547.328124708149
+        "ADF Test (BIC)": {
+            "Test Statistic": -6.5842170652828775,
+            "p-value": 7.383913067736119e-09,
+            "Used Lag": 21,
+            "Number of Observations": 1397,
+            "Critical Values": {
+                "1%": -3.4350395894411734,
+                "5%": -2.863611117606763,
+                "10%": -2.5678726562185354
+            },
+            "IC Best": 5667.84657430852
+        }
     },
     "KPSS Test": {
         "Test Statistic": 0.12730774138594153,
