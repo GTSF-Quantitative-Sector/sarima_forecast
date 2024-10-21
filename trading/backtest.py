@@ -1,14 +1,16 @@
 import backtrader as bt
 import multiprocessing
 import pandas as pd
-from strategy.auto_arima_strategy import AutoArimaStrategy
-from analyzers.final_value_analyzer import FinalValue
-from utils.data_feed import PandasData
-
+from strategy import SARIMAXStrategy
+from analyzers import FinalValue
+from data_feed import PandasData
+import backtrader.analyzers as btanalyzers
 
 # Load data
-gld_data = pd.read_csv('data/GLD-Prices.csv',
+gld_data = pd.read_csv('../GLD-Prices.csv',
                        parse_dates=True, index_col='Date')
+
+
 data_gld = PandasData(dataname=gld_data)
 
 # Initialize Backtrader Cerebro engine
@@ -19,14 +21,15 @@ cerebro.adddata(data_gld)
 
 # Add strategy to Cerebro
 cerebro.optstrategy(
-    AutoArimaStrategy,
+    SARIMAXStrategy,
     forecast_period=[1],
-    seasonal=[True],
-    m=[7],
-    threshold=[0.005],           # 0.5% threshold
-    stop_loss=[0.05, 0.1],       # 5%, 10% stop loss
-    take_profit=[0.1, 0.15],     # 10%, 15% take profit
-    verbose=[False],
+    model_order=[(2, 1, 1)],
+    seasonal_order=[(1, 1, 1, 7)],
+    threshold=[0.005],          # Adjusted to 0.5% for percentage-based logic
+    verbose=[False],            # Set to True for detailed logging
+    stop_loss=[0.05, 0.1, 0.15, 0.2],         # 5%, 10%, 15%, 20% stop loss
+    take_profit=[0.1, 0.15, 0.2, 0.25],       # 10%, 15%, 20%, 25% take profit
+    fit_interval=[5],
 )
 
 # Add analyzers to Cerebro
@@ -42,7 +45,7 @@ cerebro.broker.setcommission(commission=0.001)
 
 # Run the backtest
 num_cpus = multiprocessing.cpu_count()
-results = cerebro.run(maxcpus=num_cpus)
+results = cerebro.run(maxcpus=1)
 
 # Print results
 best_value = -(float('inf'))
