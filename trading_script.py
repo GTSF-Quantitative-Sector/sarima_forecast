@@ -47,30 +47,14 @@ API_KEY = "uwQtl3txGt5BLbecq7ZbIu0ZbuitCGjc"
 
 # %%
 # Load the CSV file into a DataFrame
-gld_data = pd.read_csv('GLD-Prices.csv')
+gld_data = pd.read_csv('data/GLD-Prices.csv')
 gld_data['Date'] = pd.to_datetime(gld_data['Date'])  # Ensure the 'Date' column is datetime
 gld_data.set_index('Date', inplace=True)  # Set 'Date' as index
 
 # Load the CSV file into a DataFrame
-slv_data = pd.read_csv('SLV-Prices.csv')
+slv_data = pd.read_csv('data/SLV-Prices.csv')
 slv_data['Date'] = pd.to_datetime(slv_data['Date'])  # Ensure the 'Date' column is datetime
 slv_data.set_index('Date', inplace=True)  # Set 'Date' as index
-
-# Load the CSV file into a DataFrame
-soyb_data = pd.read_csv('SOYB-Prices.csv')
-soyb_data['Date'] = pd.to_datetime(soyb_data['Date'])  # Ensure the 'Date' column is datetime
-soyb_data.set_index('Date', inplace=True)  # Set 'Date' as index
-
-# Load the CSV file into a DataFrame
-corn_data = pd.read_csv('CORN-Prices.csv')
-corn_data['Date'] = pd.to_datetime(corn_data['Date'])  # Ensure the 'Date' column is datetime
-corn_data.set_index('Date', inplace=True)  # Set 'Date' as index
-
-# Load the CSV file into a DataFrame
-bal_data = pd.read_csv('BAL-Prices.csv')
-bal_data['Date'] = pd.to_datetime(bal_data['Date'])  # Ensure the 'Date' column is datetime
-bal_data.set_index('Date', inplace=True)  # Set 'Date' as index
-
 # %% [markdown]
 # # Customized Pandas Data Feed for Backtrader
 # 
@@ -106,9 +90,9 @@ class PandasData(bt.feeds.PandasData):
 # Create data feeds for GLD and SLV
 data_gld = PandasData(dataname=gld_data)
 data_slv = PandasData(dataname=slv_data)
-data_soyb = PandasData(dataname=soyb_data)
-data_corn = PandasData(dataname=corn_data)
-data_bal = PandasData(dataname=bal_data)
+# data_soyb = PandasData(dataname=soyb_data)
+# data_corn = PandasData(dataname=corn_data)
+# data_bal = PandasData(dataname=bal_data)
 
 # %% [markdown]
 # # SARIMAX Trading Strategy for Backtrader
